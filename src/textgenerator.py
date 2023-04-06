@@ -5,8 +5,8 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 
 class TextGenerator:
-    def __init__(self, input_file):
-        self.data = open(input_file, 'r').read()
+    def __init__(self, lyrics):
+        self.data = lyrics
         self.tokenizer = Tokenizer()
         self.corpus = self.data.lower().split("\n")
         self.tokenizer.fit_on_texts(self.corpus)
