@@ -4,7 +4,9 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 
-class TextGenerator:
+# this class uses a model that was created from scratch
+
+class ScratchModelTextGenerator:
     def __init__(self, lyrics):
         self.data = lyrics
         self.tokenizer = Tokenizer()
@@ -47,18 +49,25 @@ class TextGenerator:
         self.model.fit(self.xs, self.ys, epochs=epochs, verbose=verbose)
 
 
-    def generate_text(self, seed_text, next_words=100):
-        for _ in range(next_words):
+    def generate_text(self, seed_text, num_generated_words = 50):
+       
+
+        for _ in range(num_generated_words):
             token_list = self.tokenizer.texts_to_sequences([seed_text])[0]
             token_list = pad_sequences([token_list], maxlen=self.max_sequence_len - 1, padding='pre')
-            predicted = self.model.predict_classes(token_list, verbose=0)
+            
+            # Use 'predict' method and 'argmax' to get the class with the highest probability
+            probabilities = self.model.predict(token_list, verbose=0)
+            predicted = np.argmax(probabilities, axis=-1)
+            
             output_word = ""
-    
-            for word, index in self.tokenizer.word_index.items():
 
+            for word, index in self.tokenizer.word_index.items():
                 if index == predicted:
                     output_word = word
                     break
+
             seed_text += " " + output_word
+
         return seed_text
 
