@@ -1,2 +1,5 @@
 tensorflow
 numpy
+transformers
+bs4
+requests
