@@ -1,9 +1,11 @@
 
-from src.ScratchModelTextGenerator import ScratchModelTextGenerator
 
-from src.GPT2ModelTextGenerator import GPT2ModelTextGenerator
 
-from src.api_handler import APIHandler
+from src.dataprocessing import ScratchModelTextGenerator
+from src.dataprocessing import GPT2ModelTextGenerator
+from src.datacollection import APIHandler
+
+
 
 
 class Main:
@@ -50,11 +52,11 @@ class Main:
 
 if __name__ == '__main__':
     
-    api_key = "your_api_key"
+    api_key = "your_api_key"  #enter your API key
 
     main = Main(api_key)
     #main.gpt2Model()
-    #main.scratchModel()
+    main.scratchModel()
 
 
 
