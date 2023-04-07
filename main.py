@@ -38,7 +38,7 @@ class Main:
 
          if lyrics:
             text_generator = ScratchModelTextGenerator(lyrics)
-            text_generator.train(epochs=2, verbose=1)
+            text_generator.train()
             generated_text = text_generator.generate_text(input_text)
             print(generated_text)
          else:
@@ -53,7 +53,7 @@ if __name__ == '__main__':
     api_key = "your_api_key"
 
     main = Main(api_key)
-    main.gpt2Model()
+    #main.gpt2Model()
     #main.scratchModel()
 
 
